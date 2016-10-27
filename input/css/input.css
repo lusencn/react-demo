@@ -1,0 +1,33 @@
+.w-ipt-ct, .w-sel-ct { 
+	background-color: #fff; 
+	display: inline-block; 
+	font-size: 0; 
+	border-radius: 3px; 
+}
+.w-ipt-ct.disabled, .w-sel-ct.disabled { 
+	background-color: rgb(235, 235, 228); 
+	color: rgb(84, 84, 84); 
+}
+.w-ipt, .w-sel { 
+	display: inline-block; 
+	vertical-align: middle; 
+	border: 0 none; 
+	background: transparent; font-size: 14px; 
+}
+.w-selipt { 
+	font-size: 0; 
+}
+
+.w-radio-ct, .w-cb-ct { 
+	display: inline-block; 
+	font-size: 0px; 
+}
+.w-radio-item, .w-radio-ipt, .w-radio-text,
+.w-cb-item, .w-cb-ipt, .w-cb-text { 
+	vertical-align: middle; 
+}
+.w-radio-text, .w-cb-text { 
+	font-size: 13px; 
+	padding-left: 5px; 
+	cursor: default; 
+}

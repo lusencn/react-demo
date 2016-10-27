@@ -1,0 +1,7 @@
+.w-dd-ct { font-size: 0; position: relative; height: 30px; line-height: 30px; cursor: pointer; }
+.w-dd-rs, .w-dd-items ul { background: #f7f9f9; border: 1px solid #ddd; padding: 0px 8px; color: #666; }
+.w-dd-rs { height: 28px; line-height: 28px; }
+.w-dd-items { position: absolute; top: 33px; width: 100%; }
+.w-dd-items li { height: 30px; line-height: 30px; position: relative; }
+.w-dd-items li img { width: 8px; height: 6px; position: absolute; right: 0; top: 50%; margin-top: -3px; }
+.w-dd-arr { position: absolute; top: 50%; margin-top: -2px; width: 0; height: 0; border-top: 4px solid #666; border-left: 4px solid transparent; border-right: 4px solid transparent; right: 8px; };
