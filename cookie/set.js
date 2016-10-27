@@ -3,7 +3,7 @@ import assign from '../object/assign';
  * 设置cookie
  */
 
-// cookie参数 
+// cookie参数
 let defaultOptions = {
     path: '/',
     domain: window.location.host
@@ -20,9 +20,13 @@ var set = function(name, value, options) {
 		_options.expires = time;
     }
 
+    if (window.location.protocol === 'https') {
+        _options.secure = true;
+    }
+
     return (document.cookie = [
         encodeURIComponent(name), '=', encodeURIComponent(value),
-        _options.expires ? '; expires=' + _options.expires.toUTCString() : '', 
+        _options.expires ? '; expires=' + _options.expires.toUTCString() : '',
         _options.path    ? '; path=' + _options.path : '',
         _options.domain  ? '; domain=' + _options.domain : '',
         _options.secure  ? '; secure' : ''
@@ -35,13 +39,13 @@ var set = function(name, value, options) {
 var remove = function(name, options) {
     set(name, null, options);
 };
-        
+
 /**
  * 清空cookie
  */
 var clear = function(options) {
-    var rs = document.cookie.match(new RegExp("([^ ;][^;]*)(?=(=[^;]*)(;|$))", "gi"));  
-    for (var i in rs){ 
+    var rs = document.cookie.match(new RegExp("([^ ;][^;]*)(?=(=[^;]*)(;|$))", "gi"));
+    for (var i in rs){
         remove(rs[i], options);
     }
 };
