@@ -1,0 +1,59 @@
+.w-grid-fix {
+	overflow-x: hidden;
+	overflow-y: auto;
+    position: absolute;
+    top: 30px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-bottom: 1px solid #E2E4E3;
+}
+
+.w-grid-table {
+	display: table;
+	width: 100%;
+	background-color: #E2E4E3;
+	border-spacing: 1px;
+}
+
+.w-grid-tr {
+	display: table-row;
+}
+
+.w-grid-th, .w-grid-td {
+	display: table-cell;
+	text-align: center;
+}
+
+.w-grid-td {
+	background-color: #fff;
+}
+
+.w-grid-tr:hover .w-grid-td {
+	background-color: #FFF9E1;
+}
+
+.w-grid-box {
+	width: 100%;
+}
+
+.w-grid-content {
+	overflow: hidden; 
+    text-overflow: ellipsis; 
+    white-space: nowrap;
+	padding: 0 10px;
+}
+
+.w-grid-action {
+	padding-left: 10px;
+}
+
+.w-grid-empty {
+	position: absolute; 
+	top: 0; 
+	left: 0; 
+	right: 0; 
+	bottom: 0;
+	border-left: 1px solid #E2E4E3;
+	border-right: 1px solid #E2E4E3;
+}

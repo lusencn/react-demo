@@ -1,0 +1,7 @@
+.dlg-modal.dlg-alert .title {
+    font-size: 14px;
+}
+.dlg-modal.dlg-alert .content {
+    padding: 30px 10px 0 10px;
+    text-align: center;
+}

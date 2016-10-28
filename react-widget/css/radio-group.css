@@ -1,0 +1,59 @@
+.radio-group {
+    margin: 0 0 30px 0;
+}
+
+.radio-group > .caption {
+    color: #999;
+    margin: 0 0 10px 0;
+    position: relative;
+}
+.radio-group > .caption > .caret {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    margin: -2.5px 0 0 0;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #ccc;
+    cursor: pointer;
+}
+.radio-group > .caption > .caret:hover, .radio-group.collapsed > .caption > .caret:hover {
+    border-bottom-color: #4fcbcd;
+    border-top-color: #4fcbcd;
+}
+.radio-group.collapsed > .caption > .caret {
+    border-bottom: 0;
+    border-top: 5px solid #ccc;
+}
+
+.radio-group.collapsed > .radio-group-list {
+    display: none;
+}
+
+.radio-group-item {
+    color: #3b3b3b;
+    margin: 0 0 15px 0;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.radio-group-item > i {
+    margin: 0 5px 0 0;
+}
+.radio-group-item > span {
+    display: inline-block;
+    vertical-align: top;
+    zoom: 1; /* Fix for IE7 */
+    *display: inline; /* Fix for IE7 */
+}
+.radio-group.vertical .radio-group-item {
+    display: block;
+}
+.radio-group.horizontal .radio-group-item {
+    display: inline;
+    margin: 0 12px 0 0;
+}

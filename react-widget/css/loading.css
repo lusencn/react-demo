@@ -1,0 +1,59 @@
+.w-loading-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 20001;
+}
+.w-loading {
+    position: fixed;
+    padding: 10px;
+    z-index: 1;
+    text-align: center;
+    width: 280px;
+    height: 150px;
+    left: 50%;
+    top: 50%;
+    margin: -75px 0 0 -140px;
+}
+.w-loading > img {
+    width: 160px;
+    height: 60px;
+    display: block;
+    margin: 20px auto;
+}
+.w-loading-text {
+    color: #999;
+    font-size: 16px;
+    white-space: nowrap;
+    height: 50px;
+    line-height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
+.w-loading-bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+    /*opacity: 0.4;
+    -moz-opacity: 0.4;
+    filter: alpha(opacity=40);*/
+    z-index: -1;
+    border-radius: 10px;
+}
+.w-loading-mask {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000;
+    opacity: 0.2;
+    -moz-opacity: 0.2;
+    filter: alpha(opacity=20);
+}
