@@ -1,12 +1,27 @@
-import {listenState} from '../../fe-state/store';
+import {listenState} from '../../fe-state/react';
+import {loadStoreState} from '../../fe-state/store';
 import React, {Component} from 'react';
+import {TODO_LIST} from '../../state/constant';
 
 /**
- * 列表
+* Todo列表
  */
 class TodoList extends Component {
+	static propTypes = {
+		// 列表当前页数据
+		currPageRecords: PropTypes.array,
+		// 列表全部记录数
+		recordsAllCnt: PropTypes.number
+	}
+
+	//-------------------------------------------------------------
+
 	constructor(props) {
     	super(props);
+	}
+
+	componentDidMount() {
+		loadStoreState(TODO_LIST);
 	}
 
 	render() {
@@ -16,8 +31,8 @@ class TodoList extends Component {
 	}
 
     itemsView() {
-        let {records} = this.props;
-        return records.map(record => {
+        let {currPageRecords} = this.props;
+        return currPageRecords.map(record => {
             let {title} = record;
             return <div>{title}</div>
         });

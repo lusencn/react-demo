@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import TodoList from './TodoList';
 
 /**
  * 页面入口
@@ -10,6 +11,7 @@ class TodoMain extends Component {
 
 	render() {
 		return <div>
+            <TodoList />
 		</div>
 	}
 }

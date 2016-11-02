@@ -1,5 +1,6 @@
 import {get as ajaxGet} from '../fe-util/ajax/get';
 import {TODO_LIST_CONDS} from '../state/constant';
+import {testTodoList} from './test';
 
 //==================================
 // Todo数据通信相关接口
@@ -18,6 +19,7 @@ const URL = {
  */
 export let listReq = (state = getStoreState(TODO_LIST_CONDS)) => {
     let params = listParamsAdapter(getQueryConds(state));
+    return testTodoList(params);
 
     return ajaxGet({
         url : URL.list,
