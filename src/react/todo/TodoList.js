@@ -1,6 +1,6 @@
+import React, {Component} from 'react';
 import {listenState} from '../../fe-state/react';
 import {loadStoreState} from '../../fe-state/store';
-import React, {Component} from 'react';
 import {TODO_LIST} from '../../state/constant';
 
 /**
