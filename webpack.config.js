@@ -24,9 +24,11 @@ module.exports = {
         // 将数组中的模块合并成一个文件
         lib: ['react', 'react-dom', 'reqwest']
     }, (() => {
-        return Object.keys(entriesPath).map(entry => {
-            path.resolve(dirConfig.srcDir, entriesPath[entry])
-        })
+        let result = {};
+        for (let entry in entriesPath) {
+            result[entry] = path.resolve(dirConfig.srcDir, entriesPath[entry]);
+        }
+        return result;
     })()),
     // 构建后输出路径相关配置
     output: {
@@ -45,7 +47,7 @@ module.exports = {
             test: /\.js$/,
             loader: 'babel', //'babel?presets[]=react,presets[]=es2015'
             query: {
-                presets: ['es2015', 'react']
+                presets: ['es2015', 'stage-0', 'react']
             },
             exclude: [
                 path.resolve(__dirname, 'node_modules'),
@@ -100,14 +102,14 @@ module.exports = {
         );
 
         // 将构建生成的JS文件添加到指定html文件中
-        /*Object.keys(entriesPath).forEach(chunk => {
+        Object.keys(entriesPath).forEach(chunk => {
             arr.push(new HtmlWebpackPlugin({
                 template: path.resolve(dirConfig.srcDir, 'index.html'),
                 filename: path.resolve(dirConfig.releaseDir, `${chunk}.html`),
                 inject: true,
                 chunks: ['lib', 'common', chunk]
             }));
-        });*/
+        });
 
         return arr;
     })()

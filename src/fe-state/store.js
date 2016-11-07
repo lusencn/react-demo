@@ -1,4 +1,4 @@
-import {EventEmitter} from 'EventEmitter2';
+import EventEmitter from 'EventEmitter2';
 import isEmpty from '../fe-util/is/isEmpty';
 
 //====================================

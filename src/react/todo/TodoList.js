@@ -1,7 +1,8 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import {listenState} from '../../fe-state/react';
 import {loadStoreState} from '../../fe-state/store';
 import {TODO_LIST} from '../../state/constant';
+import todoState from '../../state/todo';
 
 /**
 * Todo列表
@@ -32,9 +33,10 @@ class TodoList extends Component {
 
     itemsView() {
         let {currPageRecords} = this.props;
-        return currPageRecords.map(record => {
+		!currPageRecords && (currPageRecords = []);
+        return currPageRecords.map((record, i) => {
             let {title} = record;
-            return <div>{title}</div>
+            return <div key={i}>{title}</div>
         });
     }
 }

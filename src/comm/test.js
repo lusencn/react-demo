@@ -20,9 +20,9 @@ export let testTodoList = (params) => {
         })
     }
 
-    return {
+    return Promise.resolve({
         success: true,
         records,
         count: LIST_COUNT
-    };
+    });
 }
