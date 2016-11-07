@@ -13,7 +13,7 @@ let dirConfig = {
     libDir: 'lib',
     releaseDir: 'release'
 }
-let publicPath = debug ? `//127.0.0.1:8080/${dirConfig.releaseDir}/` : `//ee.chanjet.com/${dirConfig.releaseDir}/`;
+let publicPath = debug ? `//127.0.0.1:8080/${dirConfig.releaseDir}/` : `//<静态资源域名>/${dirConfig.releaseDir}/`;
 let entriesPath = {
     todo: 'react/todo/index.js'
 }
@@ -107,6 +107,7 @@ module.exports = {
                 template: path.resolve(dirConfig.srcDir, 'index.html'),
                 filename: path.resolve(dirConfig.releaseDir, `${chunk}.html`),
                 inject: true,
+                hash: !debug,
                 chunks: ['lib', 'common', chunk]
             }));
         });
