@@ -11,7 +11,7 @@ let debug = process.env.NODE_ENV != 'production';
 let dirConfig = {
     srcDir: 'src',
     libDir: 'lib',
-    releaseDir: 'release'
+    releaseDir: 'dist'
 }
 let publicPath = debug ? `//127.0.0.1:8080/${dirConfig.releaseDir}/` : `//<静态资源域名>/${dirConfig.releaseDir}/`;
 let entriesPath = {

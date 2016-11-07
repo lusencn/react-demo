@@ -8,32 +8,32 @@ import todoState from '../../state/todo';
 * Todo列表
  */
 class TodoList extends Component {
-	static propTypes = {
-		// 列表当前页数据
-		currPageRecords: PropTypes.array,
-		// 列表全部记录数
-		recordsAllCnt: PropTypes.number
-	}
+    static propTypes = {
+        // 列表当前页数据
+        currPageRecords: PropTypes.array,
+        // 列表全部记录数
+        recordsAllCnt: PropTypes.number
+    }
 
-	//-------------------------------------------------------------
+    //-------------------------------------------------------------
 
-	constructor(props) {
-    	super(props);
-	}
+    constructor(props) {
+        super(props);
+    }
 
-	componentDidMount() {
-		loadStoreState(TODO_LIST);
-	}
+    componentDidMount() {
+        loadStoreState(TODO_LIST);
+    }
 
-	render() {
-		return <div>
+    render() {
+        return <div>
             {this.itemsView()}
-		</div>
-	}
+        </div>
+    }
 
     itemsView() {
         let {currPageRecords} = this.props;
-		!currPageRecords && (currPageRecords = []);
+        !currPageRecords && (currPageRecords = []);
         return currPageRecords.map((record, i) => {
             let {title} = record;
             return <div key={i}>{title}</div>
@@ -43,8 +43,5 @@ class TodoList extends Component {
 
 export default listenState((listState) => {
     let {currPageRecords, recordsAllCnt} = listState
-    return {
-		currPageRecords,
-		recordsAllCnt
-	}
+    return {currPageRecords, recordsAllCnt}
 })(TodoList, TODO_LIST);
