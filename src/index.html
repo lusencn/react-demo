@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+	<meta name="renderer" content="webkit|ie-stand|ie-comp" />
+	<title>Todo</title>
+</head>
+<!--[if lt IE 7]> <body class="ielt9 ie6"> <![endif]-->
+<!--[if IE 7]> <body class="ielt9 ie7"> <![endif]-->
+<!--[if IE 8]> <body class="ielt9 ie8"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <body> <!--<![endif]-->
+	<div id="mainCtId"></div>
+
+	<!-- 浏览器版本过低提示 -->
+	<div id="browserNoteCtId" style="display:none;">
+		<div class="w-dlg-mask"></div>
+		<div class="browser-err-panel">
+			<div class="logo"></div>
+			<p>当前浏览器版本低，无法正常显示</p>
+			<span>请使用<a href="http://chrome.360.cn" target="_blank">360极速浏览器</a>或<a href="http://rj.baidu.com/soft/detail/14744.html" target="_blank">Google浏览器</a>或<a href="/">返回旧版</a></span>
+		</div>
+	</div>
+	<!-- 浏览器版本过低提示 -->
+	<script type="text/javascript">
+		(function(){
+    		// 浏览器兼容性检查
+    		var userAgent = navigator.userAgent.toLowerCase();
+    		var isIE = /msie/.test(userAgent) || /rv:11/.test(userAgent);
+    		var isIE8D = /msie 6/.test(userAgent) || /msie 7/.test(userAgent) || /msie 8/.test(userAgent);
+    		if (isIE8D) {
+    			try {
+    				document.getElementById('browserNoteCtId').style.display = 'block';
+    			} catch (e) {
+    			}
+    		}
+    		if (isIE) {
+    			document.write("<script type='text/javascript' src='/lib/transES6.js'><\/script>");
+    		}
+    	})();
+	</script>
+</body>
+</html>
