@@ -3,6 +3,7 @@ import {listenState} from '../../fe-state/react';
 import {loadStoreState} from '../../fe-state/store';
 import {TODO_LIST} from '../../state/constant';
 import todoState from '../../state/todo';
+import GridBody from '../../react-widget/grid/GridBody'
 
 /**
 * Todo列表
@@ -26,10 +27,24 @@ class TodoList extends Component {
     }
 
     render() {
+        let {currPageRecords} = this.props;
+        !currPageRecords && (currPageRecords = []);
+        let gridProps = {
+            columns: [{
+                name: 'title',
+                label: '标题'
+            }, {
+                name: 'content',
+                label: '内容'
+            }],
+            records: currPageRecords,
+            width: 800
+        }
         return <div>
-            {this.itemsView()}
+            <GridBody {...gridProps} />
         </div>
     }
+    //{//this.itemsView()}
 
     itemsView() {
         let {currPageRecords} = this.props;

@@ -1,11 +1,17 @@
+import cls from './css/grid.css';
+
 import React, {Component, PropTypes} from 'react';
 import {isEmpty, isFunction, isNumber} from '../utils';
+import GridCell from './GridCell';
 
 
 /**
  * 列表组件
  */
 export default class GridBody extends Component {
+    /**
+	 * 组件参数
+	 */
     static propTypes = {
         // 列表border宽度
         borderSpacing: PropTypes.number,
@@ -28,7 +34,7 @@ export default class GridBody extends Component {
         isFixHeader: PropTypes.bool,
         // 列表数据
         records: PropTypes.array.isRequired,
-        // 样式
+        // 列表样式
         // 例：{
         //      // 列表单元格样式
         //      cell: {header: {<colName>: <object>}, body: : {<colName>: <object>}},
@@ -42,9 +48,17 @@ export default class GridBody extends Component {
         width: PropTypes.number
     }
 
+    /**
+	 * 组件默认属性值
+	 */
+	static defaultProps = {
+		borderSpacing: 1
+	}
+
+    //--------------------------------------------------------------------------
+
 	constructor(props) {
     	super(props);
-        this.seedId = uuid();
 	}
 
     render() {
@@ -136,12 +150,12 @@ export default class GridBody extends Component {
     bodyView() {
         let {isFixHeader, records} = this.props;
         let fixedCtProps = {};
-        isFixHeader && fixedCtProps = {
+        isFixHeader && (fixedCtProps = {
             className: 'w-grid-fix',
             style: this.fixedCtStyle
-        }
+        })
 
-		return <div {...fixedCtProps}
+		return <div {...fixedCtProps}>
             <div className="w-grid-table" style={this.tableStyle}>
     			{isEmpty(records) ? this.emptyView() :
     				records.map((record, rowIndex) => this.rowView(record, rowIndex))}
@@ -165,7 +179,7 @@ export default class GridBody extends Component {
 		return <ul {...trProps}>
 			{columns.map(column => {
                 let {name} = column;
-                width = colWidth ? colWidth[name] : this.calColWidthVal;
+                let width = colWidth ? colWidth[name] : this.calColWidthVal;
 
                 let tdProps = {
                     className: rowIndex >= 0 ? 'w-grid-td' : 'w-grid-th',
