@@ -1,0 +1,28 @@
+.fr { 
+    float: right; 
+}
+
+.hidden { 
+    display: none; 
+}
+
+.txtflow { 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+}
+
+.clear { 
+    clear: both; 
+    *height: 0px; 
+    *line-height: 0; 
+}
+
+.clearit:after { 
+    clear: both; 
+    content: "."; 
+    display: block; 
+    height: 0; 
+    visibility: hidden; 
+}
+
