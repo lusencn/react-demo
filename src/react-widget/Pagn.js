@@ -7,13 +7,43 @@ import React, {Component, PropTypes} from 'react';
  * 翻页组件
  */
 export default class Pagn extends Component {
+	/**
+	 * 组件参数
+	 */
+	static propTypes = {
+		// 组件容器样式
+		ctStyle: PropTypes.object,
+		// 当前页码（从1开始计算）
+		currPage: PropTypes.number.isRequired,
+		// 翻页事件
+		onPagnChange: PropTypes.func.isRequired,
+		// 每页显示的记录数
+		pageSize: PropTypes.number.isRequired,
+		// 列表记录总数
+		recordCnt: PropTypes.number.isRequired,
+		// 最多显示的能按页码直接点击的链接数
+		showIndexCnt: PropTypes.number
+	}
+
+	/**
+	 * 组件参数默认值
+	 */
+	static defaultProps = {
+		showIndexCnt: 5,
+		recordCnt: 0
+	}
+
+	//--------------------------------------------------------------------------
+
 	constructor(props) {
     	super(props);
     	this.state = {};
 	}
+
 	componentDidUpdate() {
 		this.refs.pagnIpt && (this.refs.pagnIpt.value = this.currPage);
 	}
+
 	render() {
 		let {ctStyle} = this.props;
 		this.pageCnt = Math.ceil(this.props.recordCnt / this.props.pageSize);
@@ -32,7 +62,7 @@ export default class Pagn extends Component {
 			<div style={{"clear": "both"}} />
 		</div>
 	}
-	//----------------------------------------------------------------------
+
 	/**
 	 * 渲染“输入下标精确翻页”区域
 	 */
@@ -74,8 +104,8 @@ export default class Pagn extends Component {
 	        }
         }
 		for (var i = start; i <= end; i++) {
-			items.push(<li 
-				key={i} 
+			items.push(<li
+				key={i}
 				className={currPage == i ? 'on' : ''}
 				onClick={this.onClickIndex.bind(this, i)}
 			>{i}</li>);
@@ -92,17 +122,18 @@ export default class Pagn extends Component {
 		this.disableNext = (pageCnt <= 1 || currPage >= pageCnt) ? true : false;
 
 		return <ul className="w-pagn-idx-ct">
-			<li 
-				className={'w-pagn-cs-idx ' + (this.disablePrev ? 'disabled' : '')} 
+			<li
+				className={'w-pagn-cs-idx ' + (this.disablePrev ? 'disabled' : '')}
 				onClick={this.disablePrev ? undefined : this.onClickPrev.bind(this)}
 			>上一页</li>
 			{items}
-			<li 
+			<li
 				className={'w-pagn-cs-idx ' + (this.disableNext ? 'disabled' : '')}
 				onClick={this.disableNext ? undefined : this.onClickNext.bind(this)}
 			>下一页</li>
 		</ul>
 	}
+
 	/**
 	 * 渲染“汇总数据”区域
 	 */
@@ -113,10 +144,12 @@ export default class Pagn extends Component {
 				<input ref="pagnIpt" type="text" onChange={this.onChangeIpt.bind(this)}/>
 				<span>页</span>
 			</div>
-			<div className="w-pagn-btn-target" onClick={this.onClickBtn.bind(this)}>确定</div>	
+			<div className="w-pagn-btn-target" onClick={this.onClickBtn.bind(this)}>确定</div>
 		</div>
 	}
-	//----------------------------------------------------------------------
+
+	//--------------------------------------------------------------------------
+
 	/**
 	 * “上一页”翻页事件
 	 */
@@ -124,6 +157,7 @@ export default class Pagn extends Component {
 		var currPage = this.currPage - 1;
 		this.props.onPagnChange(currPage);
 	}
+
 	/**
 	 * 下标数字翻页事件
 	 */
@@ -131,6 +165,7 @@ export default class Pagn extends Component {
 		var currPage = this.currPage + 1;
 		this.props.onPagnChange(currPage);
 	}
+
 	/**
 	 * “下一页”翻页事件
 	 */
@@ -138,6 +173,7 @@ export default class Pagn extends Component {
 		var currPage = index;
 		this.props.onPagnChange(currPage);
 	}
+
 	/**
 	 * 按钮翻页
 	 */
@@ -145,6 +181,7 @@ export default class Pagn extends Component {
 		var currPage = this.refs.pagnIpt.value;
 		this.props.onPagnChange(currPage);
 	}
+
 	/**
 	 * 翻页下标输入框change事件
 	 */
@@ -159,17 +196,3 @@ export default class Pagn extends Component {
 		this.refs.pagnIpt.value = iptValue;
 	}
 }
-
-Pagn.propTypes = {
-	ctStyle: PropTypes.object,
-	showIndexCnt: PropTypes.number,
-	recordCnt: PropTypes.number.isRequired,
-	currPage: PropTypes.number.isRequired,
-	pageSize: PropTypes.number.isRequired,
-	onPagnChange: PropTypes.func.isRequired
-};
-
-Pagn.defaultProps = {
-	showIndexCnt: 5,
-	recordCnt: 0
-};

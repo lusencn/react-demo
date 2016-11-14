@@ -1,9 +1,12 @@
 import React, {Component, PropTypes} from 'react';
 import {listenState} from '../../fe-state/react';
-import {loadStoreState} from '../../fe-state/store';
-import {TODO_LIST} from '../../state/constant';
+import {loadStoreState, updateStoreState} from '../../fe-state/store';
+import {TODO_LIST, TODO_LIST_CONDS, TODO_LIST_LOAD} from '../../state/constant';
 import todoState from '../../state/todo';
-import GridBody from '../../react-widget/grid/GridBody'
+import AreaMask from '../../react-widget/AreaMask';
+import Grid from '../../react-widget/grid/Grid';
+import Pagn from '../../react-widget/Pagn';
+
 
 /**
 * Todo列表
@@ -12,14 +15,23 @@ class TodoList extends Component {
     static propTypes = {
         // 列表当前页数据
         currPageRecords: PropTypes.array,
+        // 列表每页最多显示记录数
+        pageSize: PropTypes.number,
         // 列表全部记录数
-        recordsAllCnt: PropTypes.number
+        recordsAllCnt: PropTypes.number,
+        // 列表当前页第一条记录在完整列表中的索引位置 （从0开始计数）
+        startIndex: PropTypes.number
     }
 
     //-------------------------------------------------------------
 
     constructor(props) {
         super(props);
+
+        this.fn = {
+            onLoadingChange: this.onLoadingChange.bind(this),
+            onPagnChange: this.onPagnChange.bind(this)
+        }
     }
 
     componentDidMount() {
@@ -28,7 +40,18 @@ class TodoList extends Component {
 
     render() {
         let {currPageRecords} = this.props;
-        !currPageRecords && (currPageRecords = []);
+        return <div className='todo-ct fixed'>
+            {currPageRecords != null ? this.gridView() : null}
+            {currPageRecords != null ? this.pagnView() : null}
+			<LoadingMask onLoadingChange={this.fn.onLoadingChange} />
+        </div>
+    }
+
+    /**
+     * 渲染列表组件
+     */
+    gridView() {
+        let {currPageRecords} = this.props;
         let gridProps = {
             columns: [{
                 name: 'title',
@@ -37,26 +60,72 @@ class TodoList extends Component {
                 name: 'content',
                 label: '内容'
             }],
+            isFixHeader: true,
             records: currPageRecords,
+            styles: {
+                cell: {
+                    body: {
+                        title: {
+                            'textAlign': 'left'
+                        },
+                        content: {
+                            'textAlign': 'left'
+                        }
+                    }
+                }
+            },
             width: 800
         }
-        return <div>
-            <GridBody {...gridProps} />
-        </div>
+        return <Grid {...gridProps} />
     }
-    //{//this.itemsView()}
 
-    itemsView() {
-        let {currPageRecords} = this.props;
-        !currPageRecords && (currPageRecords = []);
-        return currPageRecords.map((record, i) => {
-            let {title} = record;
-            return <div key={i}>{title}</div>
-        });
+    /**
+     * 渲染翻页组件
+     */
+    pagnView() {
+        let {pageSize, recordsAllCnt, startIndex} = this.props;
+        let pagnProps = {
+            currPage: (startIndex / pageSize) + 1,
+            onPagnChange: this.fn.onPagnChange,
+            pageSize,
+            recordCnt: recordsAllCnt
+        }
+        return <Pagn {...pagnProps} />
+    }
+
+    //--------------------------------------------------------------------------
+
+    /**
+     * 列表数据加载状态变化
+     */
+    onLoadingChange(loading) {
+        if (loading) {
+			return;
+		}
+        window.scrollTo(0, 0);
+    }
+
+    /**
+     * 列表当前页条件变化
+     */
+    onPagnChange(nextPagnNo) {
+        let {pageSize, recordsAllCnt, startIndex} = this.props;
+        updateStoreState(TODO_LIST_CONDS, {
+            startIndex: (nextPagnNo - 1) * pageSize
+        })
     }
 }
 
-export default listenState((listState) => {
-    let {currPageRecords, recordsAllCnt} = listState
-    return {currPageRecords, recordsAllCnt}
-})(TodoList, TODO_LIST);
+/**
+ * 加载中遮罩
+ */
+const LoadingMask = listenState(listLoad => {
+	let {loading} = listLoad;
+	return {loading}
+})(AreaMask, TODO_LIST_LOAD);
+
+export default listenState((listState, listCondsState) => {
+    let {currPageRecords, recordsAllCnt} = listState;
+    let {pageSize, startIndex} = listCondsState;
+    return {currPageRecords, pageSize, recordsAllCnt, startIndex}
+})(TodoList, TODO_LIST, TODO_LIST_CONDS);
