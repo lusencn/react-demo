@@ -37,11 +37,11 @@ export default class GridBody extends Component {
         // 列表样式
         // 例：{
         //      // 列表单元格样式
-        //      cell: {header: {<colName>: <object>}, body: : {<colName>: <object>}},
+        //      cell: {header: {<colName>: <object>}, body: {<colName>: <object>}},
         //      // 列表容器样式
         //      ct: <object>,
         //      // 列表td样式
-        //      td: {header: {<colName>: <object>}, body: : {<colName>: <object>}}
+        //      td: {header: {<colName>: <object>}, body: {<colName>: <object>}}
         //  }
         styles: PropTypes.object,
         // 列表容器宽度
