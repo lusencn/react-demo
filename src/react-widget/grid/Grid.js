@@ -15,17 +15,19 @@ export default class Grid extends Component {
     static propTypes = {
         // 列表border宽度
         borderSpacing: PropTypes.number,
-        // 列表元数据
+        // 列属性
+        // 例：[{
+        //      bodyCellStyle: <表体单元格样式（object）>,
+        //      bodyCellView: <表体单元格视图（func）>,
+        //      bodyTdStyle: <表体Td元素样式（object）>,
+        //      headerCellStyle: <表头单元格样式（object）>,
+        //      headerCellView: <表头单元格视图（func）>,
+        //      headerTdStyle: <表头Td元素样式（object）>,
+        //      label: <显示名称（必选）>,
+        //      name: <字段名称（必选）>,
+        //      width: <宽度>
+        //  }, ……]
         columns: PropTypes.array.isRequired,
-        // TD视图
-        // 例：{
-        //      body: {<colName>: <func>}
-        //      header: {<colName>: <func>},
-        //  }
-        colViews: PropTypes.object,
-        // 各列宽度
-        // 例：{<colName>: <width>}
-        colWidth: PropTypes.object,
         // 列表空数据视图
         emptyView: PropTypes.func,
         // 表头高度
@@ -34,16 +36,8 @@ export default class Grid extends Component {
         isFixHeader: PropTypes.bool,
         // 列表数据
         records: PropTypes.array.isRequired,
-        // 列表样式
-        // 例：{
-        //      // 列表单元格样式
-        //      cell: {header: {<colName>: <object>}, body: {<colName>: <object>}},
-        //      // 列表容器样式
-        //      ct: <object>,
-        //      // 列表td样式
-        //      td: {header: {<colName>: <object>}, body: {<colName>: <object>}}
-        //  }
-        styles: PropTypes.object,
+        // 列表容器样式
+        style: PropTypes.object,
         // 列表容器宽度
         width: PropTypes.number
     }
@@ -74,11 +68,10 @@ export default class Grid extends Component {
      * 设置样式
      */
     initStyle() {
-        let {borderSpacing, headerHeight, isFixHeader, styles, width} = this.props;
-        let {ct} = styles || {};
+        let {borderSpacing, headerHeight, isFixHeader, style, width} = this.props;
 
         // 列表容器样式
-        this.ctStyle = Object.assign({}, isFixHeader ? {position: 'relative'} : null, ct, {
+        this.ctStyle = Object.assign({}, isFixHeader ? {position: 'relative'} : null, style, {
     		width: width
     	});
 
@@ -102,7 +95,7 @@ export default class Grid extends Component {
 	calColWidth() {
 		this.calColWidthVal = 'auto';
 
-		let {borderSpacing, columns, colWidth, width} = this.props;
+		let {borderSpacing, columns, width} = this.props;
 		if (!width || !isNumber(width)) {
 			return;
 		}
@@ -117,7 +110,7 @@ export default class Grid extends Component {
         // 用于平均计算的宽度值
 		let minusResult = width - (columns.length + 1) * (borderSpacing || 1);
 		columns.some(column => {
-			let itemWidth = colWidth ? colWidth[column.name] : null;
+			let itemWidth = column.width;
 			if (!itemWidth) {
 				noWidthCnt++;
 				return false;
@@ -168,10 +161,7 @@ export default class Grid extends Component {
 	 * 表格行视图
 	 */
 	rowView(record, rowIndex) {
-		let {columns, colViews, colWidth, styles} = this.props;
-        let {cell, td} = styles || {};
-        let cellStyles = cell;
-        let tdStyles = td;
+		let {columns} = this.props;
 		let trProps = {
             className: 'w-grid-tr',
             key: `gridRow_${rowIndex}`
@@ -179,24 +169,35 @@ export default class Grid extends Component {
 
 		return <ul {...trProps}>
 			{columns.map(column => {
-                let {name} = column;
-                let width = colWidth ? colWidth[name] : this.calColWidthVal;
+                let {
+                    name, width, headerCellView, bodyCellView,
+                    headerCellStyle, bodyCellStyle, headerTdStyle, bodyTdStyle
+                } = column;
+                width = width || this.calColWidthVal;
+                let isHeader = this.isHeaderRow(rowIndex);
 
                 let tdProps = {
-                    className: rowIndex >= 0 ? 'w-grid-td' : 'w-grid-th',
+                    className: isHeader ? 'w-grid-th' : 'w-grid-td',
         			key: `gridHeader_${name}`,
-        			style: Object.assign({}, this.headerOrBodyInfo(tdStyles, name, rowIndex),
+        			style: Object.assign({}, isHeader ? headerTdStyle : bodyTdStyle,
                         width ? {width} : null)
         		}
                 let cellProps = {
                     column, record, rowIndex, width,
-                    cellView: this.headerOrBodyInfo(colViews, name, rowIndex),
-                    style: this.headerOrBodyInfo(cellStyles, name, rowIndex)
+                    cellView: isHeader ? headerCellView : bodyCellView,
+                    style: isHeader ? headerCellStyle : bodyCellStyle
                 }
                 return <li {...tdProps}><GridCell {...cellProps} /></li>
             })}
 		</ul>
 	}
+
+    /**
+     * 是否是表头行
+     */
+    isHeaderRow(rowIndex) {
+        return rowIndex < 0
+    }
 
     /**
      * 通过rowIndex判断，获取表头或表体的视图信息

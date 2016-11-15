@@ -19,11 +19,11 @@ class TodoList extends Component {
         pageSize: PropTypes.number,
         // 列表全部记录数
         recordsAllCnt: PropTypes.number,
-        // 列表当前页第一条记录在完整列表中的索引位置 （从0开始计数）
+        // 列表当前页第一条记录在完整列表中的索引位置（从0开始计数）
         startIndex: PropTypes.number
     }
 
-    //-------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     constructor(props) {
         super(props);
@@ -55,21 +55,15 @@ class TodoList extends Component {
         let gridProps = {
             columns: [{
                 name: 'title',
-                label: '标题'
+                label: '标题',
+                bodyCellStyle: {'textAlign': 'left'}
             }, {
                 name: 'content',
-                label: '内容'
+                label: '内容',
+                bodyCellStyle: {'textAlign': 'left'}
             }],
             isFixHeader: true,
             records: currPageRecords,
-            styles: {
-                cell: {
-                    body: {
-                        title: {'textAlign': 'left'},
-                        content: {'textAlign': 'left'}
-                    }
-                }
-            },
             width: 800
         }
         return <Grid {...gridProps} />
