@@ -5,7 +5,7 @@ let webpack = require('webpack');
 
 let CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 let DefinePlugin = webpack.DefinePlugin;
-var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
+let UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 
 // 配置
 let debug = process.env.NODE_ENV != 'production';
