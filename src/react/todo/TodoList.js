@@ -65,12 +65,8 @@ class TodoList extends Component {
             styles: {
                 cell: {
                     body: {
-                        title: {
-                            'textAlign': 'left'
-                        },
-                        content: {
-                            'textAlign': 'left'
-                        }
+                        title: {'textAlign': 'left'},
+                        content: {'textAlign': 'left'}
                     }
                 }
             },

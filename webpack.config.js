@@ -5,6 +5,7 @@ let webpack = require('webpack');
 
 let CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 let DefinePlugin = webpack.DefinePlugin;
+var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 
 // 配置
 let debug = process.env.NODE_ENV != 'production';
@@ -13,7 +14,7 @@ let dirConfig = {
     libDir: 'lib',
     releaseDir: 'dist'
 }
-let publicPath = debug ? `//127.0.0.1:8080/${dirConfig.releaseDir}/` : `//<静态资源域名>/${dirConfig.releaseDir}/`;
+let publicPath = debug ? `//127.0.0.1:8080/${dirConfig.releaseDir}/` : `//127.0.0.1:3000/todo/${dirConfig.releaseDir}/`;
 let entriesPath = {
     todo: 'react/todo/index.js'
 }
@@ -107,7 +108,6 @@ module.exports = {
                 template: path.resolve(dirConfig.srcDir, 'index.html'),
                 filename: path.resolve(dirConfig.releaseDir, `${chunk}.html`),
                 inject: true,
-                hash: !debug,
                 chunks: ['lib', 'common', chunk]
             }));
         });

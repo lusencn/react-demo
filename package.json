@@ -7,8 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "dev": "webpack-dev-server --devtool eval --progress --colors --hot --inline",
-    "webpack": "webpack --display-error-details"
+    "dev": "set NODE_ENV=debug && webpack-dev-server --devtool eval --progress --colors --hot --inline",
+    "webpack": "set NODE_ENV=debug && webpack --display-error-details"
   },
   "repository": {
     "type": "git",
