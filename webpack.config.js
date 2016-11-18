@@ -16,7 +16,8 @@ let dirConfig = {
 }
 let publicPath = debug ? `//127.0.0.1:8080/${dirConfig.releaseDir}/` : `//127.0.0.1:3000/todo/${dirConfig.releaseDir}/`;
 let entriesPath = {
-    todo: 'react/todo/index.js'
+    //todo: 'react/todo/index.js',
+    mobxTodo: 'mobx/todo/index.js'
 }
 
 module.exports = {
@@ -48,7 +49,8 @@ module.exports = {
             test: /\.js$/,
             loader: 'babel', //'babel?presets[]=react,presets[]=es2015'
             query: {
-                presets: ['es2015', 'stage-0', 'react']
+                presets: ['es2015', 'stage-0', 'react'],
+                plugins: ['babel-plugin-transform-decorators-legacy']
             },
             exclude: [
                 path.resolve(__dirname, 'node_modules'),
