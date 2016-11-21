@@ -1,5 +1,4 @@
 import {get as ajaxGet} from '../fe-util/ajax/get';
-import {TODO_LIST_CONDS} from '../state/constant';
 
 //==================================
 // Todo数据通信相关接口
@@ -16,7 +15,7 @@ const URL = {
 /**
  * 查询Todo列表数据
  */
-export let listReq = (state = getStoreState(TODO_LIST_CONDS)) => {
+export let listReq = (state = {}) => {
     let params = listParamsAdapter(getQueryConds(state));
 
     return ajaxGet({
