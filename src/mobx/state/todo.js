@@ -10,7 +10,13 @@ import isEmpty from '../../fe-util/is/isEmpty';
  * Todo列表
  */
 export let page = observable({
+    /**
+     * 列表客户总数
+     */
     recordsAllCnt: 0,
+    /**
+     * 客户列表当前页数据（null：表示尚未查询；[]：表示查询结果为空）
+     */
     currPageRecords: null
 });
 
@@ -18,7 +24,13 @@ export let page = observable({
  * Todo列表查询条件
  */
 export let conds = observable({
+    /**
+     * 每页加载记录数
+     */
     pageSize: 30,
+    /**
+     * 当前页第一条数据在整个列表的数组位置
+     */
     startIndex: 0
 });
 

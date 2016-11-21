@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import equals from '../../fe-util/object/equals';
-import isEmpty from '../../fe-util/is/isEmpty';
 import {getStoreEventEmitter, getStoreState} from './store';
+import {equals, isEmpty} from './utils';
 
 //====================================
 // 监听React视图状态变化

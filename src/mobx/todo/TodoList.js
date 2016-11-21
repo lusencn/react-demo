@@ -11,15 +11,7 @@ import {page, conds, loadingState} from '../state/todo';
 * Todo列表
  */
 @observer
-class TodoList extends Component {
-    static propTypes = {
-        todoPage: PropTypes.object,
-        todoConds: PropTypes.object,
-        todoLoadState: PropTypes.object
-    }
-
-    //--------------------------------------------------------------------------
-
+export default class TodoList extends Component {
     constructor(props) {
         super(props);
 
@@ -96,5 +88,3 @@ class TodoList extends Component {
         conds.startIndex = (nextPagnNo - 1) * conds.pageSize;
     }
 }
-
-export default TodoList;

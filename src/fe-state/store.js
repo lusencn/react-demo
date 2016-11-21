@@ -1,5 +1,5 @@
 import EventEmitter from 'EventEmitter2';
-import isEmpty from '../../fe-util/is/isEmpty';
+import {isEmpty} from './utils';
 
 //====================================
 // 前端状态管理
