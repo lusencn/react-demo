@@ -17,7 +17,8 @@ let dirConfig = {
 let publicPath = debug ? `//127.0.0.1:8080/${dirConfig.releaseDir}/` : `//127.0.0.1:3000/todo/${dirConfig.releaseDir}/`;
 let entriesPath = {
     todo: 'react/todo/index.js',
-    mobxTodo: 'mobx/todo/index.js'
+    mobxTodo: 'mobx/todo/index.js',
+    reduxTodo: 'redux/todo/index.js'
 }
 
 module.exports = {
