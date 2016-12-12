@@ -1,10 +1,9 @@
 import {TODO_LIST, TODO_LIST_CONDS, TODO_LIST_LOAD} from 'data/state/constant';
-import {toJS} from 'mobx';
 import React, {Component, PropTypes} from 'react';
 import AreaMask from 'lib/react-widget/AreaMask';
 import Grid from 'lib/react-widget/grid/Grid';
 import Pagn from 'lib/react-widget/Pagn';
-import {listenState} from 'lib/state/store';
+import {convert2Arr, listenState} from 'lib/state/store';
 
 
 /**
@@ -121,7 +120,7 @@ export default listenState((listStore, listCondsStore) => {
     let {pageSize, startIndex, update} = listCondsStore;
     return {
         pageSize, allRecordsCnt, startIndex,
-        currPageRecords: currPageRecords ? toJS(currPageRecords).slice() : currPageRecords,
+        currPageRecords: convert2Arr(currPageRecords),
         loadList: load,
         updateListConds: update.bind(listCondsStore)
     }

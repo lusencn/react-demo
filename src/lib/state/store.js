@@ -1,4 +1,4 @@
-import {action, observable, transaction} from 'mobx';
+import {action, observable, toJS, transaction} from 'mobx';
 import {observer} from 'mobx-react';
 import React, {Component} from 'react';
 import {equals, isEmpty} from './utils';
@@ -56,6 +56,13 @@ export let defineStore = (name, data) => {
  */
 export let getStore = (name) => {
     return stores[name] || {};
+};
+
+/**
+ * mobx数组数据类型转换
+ */
+export let convert2Arr = (data) => {
+	return data ? toJS(data).slice() : data
 };
 
 /**
