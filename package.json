@@ -9,8 +9,7 @@
   "scripts": {
     "build-prop": "cross-env NODE_ENV=production && npm run build",
     "build": "webpack --config ./config/webpack/config.js --progress --colors --display-error-details",
-    "dev": "webpack-dev-server --config ./config/webpack/config.js --devtool eval --progress --colors --hot --inline",
-    "server": "node server/server.js"
+    "dev": "webpack-dev-server --config ./config/webpack/config.js --devtool eval --progress --colors --hot --inline"
   },
   "repository": {
     "type": "git",
