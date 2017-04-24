@@ -9,7 +9,7 @@ let DefinePlugin = webpack.DefinePlugin;
 let UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 
 let {
-    debug, entriesPath, libNames, releaseDir, resPrePath, srcDir
+    debug, entriesPath, libNames, releaseDir, releaseHtmlDir, resPrePath, srcDir
 } = cfg;
 
 module.exports = {
@@ -98,12 +98,29 @@ module.exports = {
         );
 
         // 将构建生成的JS文件添加到指定html文件中
-        Object.keys(entriesPath).forEach(chunk => {
+        /*Object.keys(entriesPath).forEach(chunk => {
             arr.push(new HtmlWebpackPlugin({
-                template: path.join(srcDir, 'index.html'),
+                template: path.join(srcDir, 'tpl/index.html'),
                 filename: path.join(releaseDir, `${chunk}.html`),
                 inject: true,
                 chunks: ['lib', 'common', chunk]
+            }));
+        });*/
+
+        Object.keys(entriesPath).forEach(chunk => {
+            arr.push(new HtmlWebpackPlugin({
+                chunks: [chunk],
+                filename: path.resolve(releaseHtmlDir, `${chunk}_css.html`),
+                inject: false,
+                template: path.resolve(srcDir, 'tpl/css.html')
+            }));
+
+            arr.push(new HtmlWebpackPlugin({
+                chunks: ['lib', 'common', chunk],
+                filename: path.resolve(releaseHtmlDir, `${chunk}_js.html`),
+                inlineNames: ['jsInline'],
+                inject: false,
+                template: path.resolve(srcDir, 'tpl/js.html')
             }));
         });
 

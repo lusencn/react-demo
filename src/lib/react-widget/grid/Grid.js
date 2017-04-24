@@ -54,6 +54,7 @@ export default class Grid extends Component {
 
 	constructor(props) {
     	super(props);
+        this.fixBodyCt = 'fixBodyCt';
 	}
 
     render() {
@@ -146,7 +147,8 @@ export default class Grid extends Component {
         let fixedCtProps = {};
         isFixHeader && (fixedCtProps = {
             className: 'w-grid-fix',
-            style: this.fixedCtStyle
+            style: this.fixedCtStyle,
+            ref: this.fixBodyCt
         })
 
 		return <div {...fixedCtProps}>
@@ -220,5 +222,28 @@ export default class Grid extends Component {
 		let {emptyView} = this.props;
 		return isFunction(emptyView) ? emptyView() :
 			<div className="w-grid-empty"><i className="i-empty"></i></div>
+	}
+
+    //--------------------------------------------------------------------------
+
+    /**
+	 * 滚动到指定位置
+	 */
+	scrollTo(pos) {
+		try {
+			if (!isEmpty(pos)) {
+				let el = this.refs[this.fixBodyCt];
+				el && (el.scrollTop = pos);
+			}
+		} catch (e) {
+		}
+	}
+
+	/**
+	 * 获取滚动条位置
+	 */
+	getScrollTop() {
+		let el = this.refs[this.fixBodyCt];
+		return el ? (el.scrollTop || 0) : 0;
 	}
 }

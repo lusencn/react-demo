@@ -1,0 +1,3 @@
+<% htmlWebpackPlugin.options.chunks.forEach(function(key){ %>
+<script src="<%= htmlWebpackPlugin.files.chunks[key].entry %>" type="text/javascript"></script>
+<% }) %>

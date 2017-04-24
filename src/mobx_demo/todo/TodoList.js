@@ -28,6 +28,7 @@ class TodoList extends Component {
     constructor(props) {
         super(props);
 
+        this.gridRef = 'gridRef';
         this.fn = {
             onLoadingChange: this.onLoadingChange.bind(this),
             onPagnChange: this.onPagnChange.bind(this)
@@ -65,7 +66,8 @@ class TodoList extends Component {
             }],
             isFixHeader: true,
             records: currPageRecords,
-            width: 800
+            width: 800,
+            ref: this.gridRef
         }
         return <Grid {...gridProps} />
     }
@@ -93,7 +95,8 @@ class TodoList extends Component {
         if (loading) {
 			return;
 		}
-        window.scrollTo(0, 0);
+        this.refs[this.gridRef].scrollTo(0);
+        //window.scrollTo(0, 0);
     }
 
     /**

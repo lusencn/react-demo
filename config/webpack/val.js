@@ -22,9 +22,9 @@ const debug = (env == 'development');
  * 页面入口
  */
 const entriesPath = {
-    mobx_demo: 'mobx_demo/index.js',
+    mobx_demo: 'mobx_demo/index.js'/*,
     react_demo: 'react_demo/index.js',
-    redux_demo: 'redux_demo/index.js'
+    redux_demo: 'redux_demo/index.js'*/
 }
 
 /**
@@ -43,6 +43,11 @@ const releaseFolder = 'dist';
  * JS/CSS构建后发布目录（绝对路径）
  */
 const releaseDir = path.resolve(prjDir, releaseFolder);
+
+/**
+ * JS/CSS构建后发布html目录（绝对路径）
+ */
+const releaseHtmlDir = path.resolve(prjDir, '../koa-demo/server/views/res');
 
 /**
  * 静态资源域名
@@ -65,5 +70,5 @@ const srcDir = path.resolve(prjDir, 'src');
 
 module.exports = {
     debug, entriesPath, libNames, prjDir,
-    releaseDir, resDomain, resPrePath, srcDir
+    releaseDir, releaseHtmlDir, resDomain, resPrePath, srcDir
 }

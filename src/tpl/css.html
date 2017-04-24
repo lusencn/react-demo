@@ -1,0 +1,3 @@
+<% htmlWebpackPlugin.options.chunks.forEach(function(key){ %>
+<link href="<%= htmlWebpackPlugin.files.chunks[key].css %>" type="text/css" rel="stylesheet"></link>
+<% }) %>
