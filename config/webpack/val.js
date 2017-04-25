@@ -11,8 +11,6 @@ const env = (process.env.NODE_ENV || 'development').toString().trim();
  */
 const prjDir = path.resolve(__dirname, '../../');
 
-
-
 /**
  * 是否是调试环境
  */
