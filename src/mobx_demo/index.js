@@ -1,6 +1,6 @@
-import commonCls from 'css/common.css';
-import resetCls from 'css/reset.css';
-import todoCls from 'css/todo.css';
+import 'css/common.css';
+import 'css/reset.css';
+import 'css/todo.css';
 
 import store from 'data/state/todo';
 import React, {Component} from 'react';
