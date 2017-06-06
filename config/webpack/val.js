@@ -51,8 +51,8 @@ const releaseHtmlDir = path.resolve(prjDir, '../koa-demo/server/views/res');
  * 静态资源域名
  */
 const resDomain = {
-    'development': '127.0.0.1:8080',
-    'production': '127.0.0.1:8080'
+    'development': '127.0.0.1:8081',
+    'production': '127.0.0.1:8081'
 }
 
 /**
